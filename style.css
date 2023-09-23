@@ -1,0 +1,46 @@
+*{
+  font-size: 24px;
+  }
+
+#board {
+  border: 1px solid black;
+  background: lightgrey;
+  display: grid;
+  width: 80vw;
+  aspect-ratio: 1/1;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  grid-template-rows: 30% 30% 30%;
+  aligh-content: center;
+  gap: calc(10%/3);
+  margin: auto;
+  justify-content: center;
+  padding: 10px;
+  
+  }
+
+#board > * {
+  border: 1px solid blue;
+  background: black;
+  color: black;
+  text-align: center;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  font-size: 24pt;
+  user-select: none;
+  
+  
+}
+
+#board>*:hover {
+  background: blue;
+  color: blue;
+  }
+
+#board > *.show {
+  background: white;
+}
+
+#board>*>span {
+  vertical-align: inherit;
+}
