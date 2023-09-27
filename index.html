@@ -51,7 +51,12 @@
  signBtn.onclick = ()=>{
    let user = auth.currentUser;
    if (user){
-     //signOut(auth, provider);
+     signOut(auth).then(()=>{
+       //successful sign out
+     }).catch((error)=>{
+       //unsuccessful sign out
+     });
+     
    } else {
      signInWithRedirect(auth, provider);
    }
