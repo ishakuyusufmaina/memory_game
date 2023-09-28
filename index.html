@@ -138,8 +138,8 @@ let signBtn = document.getElementById("signBtn");
   </div>
 </div>
       <script>
-  
-alert(set);
+        var mySet;
+        var myRef;
   function randint(low, high) {
     
     let num = Math.random();
@@ -203,11 +203,7 @@ alert(set);
           score.innerHTML = scores;
           guesses = [];
           if (scores > +hScore.textContent){
-           try {
-             alert(app);
-        } catch(e){
-             alert(e);
-    }
+           alert (mySet);
             highestScore = scores;
             localStorage.setItem("highestScore", highestScore);
             hScore.innerHTML = localStorage.getItem("highestScore");
