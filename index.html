@@ -49,6 +49,16 @@ let signBtn = document.getElementById("signBtn");
      if (user){
        //user has signed in
        signBtn.innerHTML = "Sign out";
+       let userRef = ref(db, `users/${user.uid});
+       let myChild = child(userRef);
+       get(myChild).then((snapshot)=>{
+       if (snapshot.exists()){
+       } else {
+
+       }
+       }).catch((e)=>{
+
+       });
        
      } else {
        //user has signed out
