@@ -1,7 +1,9 @@
 *{
   font-size: 24px;
   }
-
+#signBtn {
+  float: right;
+}
 #board {
   border: 1px solid black;
   background: lightgrey;
