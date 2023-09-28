@@ -41,7 +41,7 @@
    const provider= new GoogleAuthProvider();
 //alert("after initialization");
 
-   alert("before signing logic");
+   //alert("before signing logic");
 let signBtn = document.getElementById("signBtn");
    onAuthStateChanged(auth, (user)=>{
      if (user){
@@ -52,9 +52,9 @@ let signBtn = document.getElementById("signBtn");
        signBtn.innerHTML = "Sign in";
      }
    });
-   alert("after onAuthStateChanged call");
+  // alert("after onAuthStateChanged call");
 
-   try {
+   alert("app: " + app +", auth: " + auth + ", provider: " + provider);
    signBtn.onclick = ()=>{
    let user = auth.currentUser;
    if (user){
@@ -69,17 +69,14 @@ let signBtn = document.getElementById("signBtn");
    }
  }
 
-} catch(e){
-  let debugCon = document.getElementById("debugCon");
-  debugCon.innerHTML = e;
-}
+
  </script>
   
   <title>Game of Memory</title>
 </head>
   
 <body class="container">
-  <div id="debugCon">debu..</div>
+  <div id="debugCon">de..bu..</div>
   <button class="btn" id="signBtn">Sign in</button>
   <dialog id="gover_dialog">
     <div>
