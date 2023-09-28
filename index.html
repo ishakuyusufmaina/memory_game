@@ -156,7 +156,7 @@ let signBtn = document.getElementById("signBtn");
   
   
   var timerId;
-  
+   
   function countup(count, limit, oncount, oncountLimit){
     if (count < limit) {
       oncount(count);
@@ -200,7 +200,11 @@ let signBtn = document.getElementById("signBtn");
           score.innerHTML = scores;
           guesses = [];
           if (scores > +hScore.textContent){
-            alert(app);
+           try {
+             alert(app);
+        } catch(e){
+             alert(e);
+    }
             highestScore = scores;
             localStorage.setItem("highestScore", highestScore);
             hScore.innerHTML = localStorage.getItem("highestScore");
