@@ -93,8 +93,12 @@ let signBtn = document.getElementById("signBtn");
 
 //alert(signBtn)
 
-   mySet = set;
-   myRef = ref;
+   firebase= {
+     set: set,
+     ref: ref,
+     auth: auth,
+     db: db
+          }
  </script>
   
   <title>Game of Memory</title>
@@ -138,8 +142,7 @@ let signBtn = document.getElementById("signBtn");
   </div>
 </div>
       <script>
-        var mySet;
-        var myRef;
+        var firebase;
   function randint(low, high) {
     
     let num = Math.random();
@@ -203,10 +206,16 @@ let signBtn = document.getElementById("signBtn");
           score.innerHTML = scores;
           guesses = [];
           if (scores > +hScore.textContent){
-           alert (mySet);
+           
             highestScore = scores;
             localStorage.setItem("highestScore", highestScore);
-            hScore.innerHTML = localStorage.getItem("highestScore");
+            if (firebase.auth.currentUser){
+              let userRef = firebase.ref(firebase.db, `users/${firebase.auth.currentUser.uid}`)
+            firebase.set(userRef, {highestScore: scores});
+         } else {
+              hScore.innerHTML = localStorage.getItem("highestScore");
+           }
+            
           }
           timerId= setTimeout(()=>{
             hideAll();
