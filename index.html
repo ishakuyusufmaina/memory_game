@@ -69,15 +69,15 @@ let signBtn = document.getElementById("signBtn");
    }
  }
 
-alert(signBtn)
+//alert(signBtn)
  </script>
   
   <title>Game of Memory</title>
 </head>
   
 <body class="container">
-  <div id="debugCon">de.</div>
-  <button class="btn" id="signBtn">Sign in</button>
+<div id="app_root">  
+  <button class="btn" id="signBtn">Sign</button>
   <dialog id="gover_dialog">
     <div>
       Game over!<br> Total score: 
@@ -89,7 +89,6 @@ alert(signBtn)
     <div>
       Match: <span id="guess"></span>
     </div>
-     <div id="root">
        <div id="board">
          <div></div>
          <div></div>
@@ -101,7 +100,6 @@ alert(signBtn)
          <div></div>
          <div></div>
        </div>
-     </div>
     <div>
       Score: 
       <span id="score"></span>
@@ -113,6 +111,7 @@ alert(signBtn)
       </span>
     </div>
   </div>
+</div>
       <script>
   
  
