@@ -53,7 +53,7 @@ let signBtn = document.getElementById("signBtn");
        let userRef= ref(db, `users/${user.uid}`);
        onValue(userRef, (snapshot)=>{
          if (snapshot.exists()){
-           let userData = snapshot.val;
+           let userData = snapshot.val();
            hScore.innerHTML = userData.highestScore;
          }
        });
@@ -61,6 +61,7 @@ let signBtn = document.getElementById("signBtn");
        get(myChild).then((snapshot)=>{
        if (!snapshot.exists()){
          set(userRef, {highestScore: 0});
+        // hScore.innerHTML = 0;
        } else {
 
        }
