@@ -49,10 +49,12 @@ let signBtn = document.getElementById("signBtn");
      if (user){
        //user has signed in
        signBtn.innerHTML = "Sign out";
-       let userRef = ref(db, `users/${user.uid});
-       let myChild = child(userRef);
+       let userRef = ref(db);
+       let myChild = child(userRef, `users/${user.uid}`);
        get(myChild).then((snapshot)=>{
-       if (snapshot.exists()){
+       if (!snapshot.exists()){
+         set(ref(db, `users/${user.uid}), {
+         highestScore: 0});
        } else {
 
        }
