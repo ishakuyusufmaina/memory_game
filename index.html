@@ -54,7 +54,7 @@ let signBtn = document.getElementById("signBtn");
    });
   // alert("after onAuthStateChanged call");
 
-   alert("app: " + app +", auth: " + auth + ", provider: " + provider);
+  // alert("app: " + app +", auth: " + auth + ", provider: " + provider);
    signBtn.onclick = ()=>{
    let user = auth.currentUser;
    if (user){
@@ -69,14 +69,14 @@ let signBtn = document.getElementById("signBtn");
    }
  }
 
-
+alert(signBtn)
  </script>
   
   <title>Game of Memory</title>
 </head>
   
 <body class="container">
-  <div id="debugCon">de..bu..</div>
+  <div id="debugCon">de.</div>
   <button class="btn" id="signBtn">Sign in</button>
   <dialog id="gover_dialog">
     <div>
@@ -114,7 +114,7 @@ let signBtn = document.getElementById("signBtn");
     </div>
   </div>
       <script>
-  alert(app); 
+  
  
   function randint(low, high) {
     
