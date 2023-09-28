@@ -37,8 +37,8 @@
    const auth = getAuth(app);
    const provider= new GoogleAuthProvider();
 
-
-
+try {
+let signBtn = document.getElementById("signBtn");
    auth.onAuthStateChanged((user)=>{
      if (user){
        //user has signed in
@@ -61,11 +61,18 @@
      signInWithRedirect(auth, provider);
    }
  }
+
+} catch(e){
+  let debugCon = document.getElementById("debugCon");
+  debugCon.innerHTML = e;
+}
  </script>
   
   <title>Game of Memory</title>
 </head>
+  
 <body class="container">
+  <div id="debugCon"></div>
   <button class="btn" id="signBtn">Sign in</button>
   <dialog id="gover_dialog">
     <div>
