@@ -45,11 +45,11 @@
 
    //alert("before signing logic");
 let signBtn = document.getElementById("signBtn");
-   onAuthStateChanged(auth, (user)=>{
+  let unsubscribe = await onAuthStateChanged(auth, (user)=>{
      if (user){
        //user has signed in
        signBtn.innerHTML = "Sign out";
-       let dbRef = ref(db);
+       /*let dbRef = ref(db);
        let userRef= ref(db, `users/${user.uid}`);
        onValue(userRef, (snapshot)=>{
          if (snapshot.exists()){
@@ -67,13 +67,14 @@ let signBtn = document.getElementById("signBtn");
        }
        }).catch((e)=>{
 
-       });
+       }); */
        
      } else {
        //user has signed out
        signBtn.innerHTML = "Sign in";
      }
    });
+   alert(auth.currentUser);
   // alert("after onAuthStateChanged call");
 
   // alert("app: " + app +", auth: " + auth + ", provider: " + provider);
