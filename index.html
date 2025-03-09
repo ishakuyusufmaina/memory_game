@@ -16,7 +16,7 @@
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
-  import {getAuth, GoogleAuthProvider, signInWithRedirect, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+  import {getAuth, GoogleAuthProvider, signInWithRedirect, signinWithPopup, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
    import {getDatabase, set, ref, onValue, child, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
@@ -74,7 +74,9 @@ let signBtn = document.getElementById("signBtn");
        signBtn.innerHTML = "Sign in";
      }
    });
-   alert(auth.currentUser);
+  if (!auth.currentUser)
+    let userCrd = await signInWithPopup(auth, provider);
+   else alert(auth.currentUser);
   // alert("after onAuthStateChanged call");
 
   // alert("app: " + app +", auth: " + auth + ", provider: " + provider);
