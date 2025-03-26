@@ -1,274 +1,85 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css"/>
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
- <script type="module" defer>
-  
-    // alert("b4 importation");
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
-  import {getAuth, GoogleAuthProvider, signInWithRedirect, signInWithPopup, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-   import {getDatabase, set, ref, onValue, child, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-//alert("after importation");
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBJt1DC-tmhdfv3HdWuIBLwWgXQdHejsKU",
-    authDomain: "imemory-game.firebaseapp.com",
-    databaseURL: "https://imemory-game-default-rtdb.firebaseio.com",
-    projectId: "imemory-game",
-    storageBucket: "imemory-game.appspot.com",
-    messagingSenderId: "1095222432653",
-    appId: "1:1095222432653:web:d11d82422ff42bc65a63c4",
-    measurementId: "G-0M2J6KHY7S"
-  };
-
-     //alert("before initialization");
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-   const auth = getAuth(app);
-   const provider= new GoogleAuthProvider();
-   const db = getDatabase(app);
-//alert("after initialization");
-
-   //alert("before signing logic");
-let signBtn = document.getElementById("signBtn");
-  let unsubscribe = await onAuthStateChanged(auth, (user)=>{
-     if (user){
-       //user has signed in
-       signBtn.innerHTML = "Sign out";
-       /*let dbRef = ref(db);
-       let userRef= ref(db, `users/${user.uid}`);
-       onValue(userRef, (snapshot)=>{
-         if (snapshot.exists()){
-           let userData = snapshot.val();
-           hScore.innerHTML = userData.highestScore;
-         }
-       });
-       let myChild = child(dbRef, `users/${user.uid}`);
-       get(myChild).then((snapshot)=>{
-       if (!snapshot.exists()){
-         set(userRef, {highestScore: 0});
-        // hScore.innerHTML = 0;
-       } else {
-
-       }
-       }).catch((e)=>{
-
-       }); */
-       
-     } else {
-       //user has signed out
-       signBtn.innerHTML = "Sign in";
-     }
-   });
-   
-  if (!auth.currentUser){
-    let userCrd = await signInWithPopup(auth, provider);
-  }  else {
-    alert(auth.currentUser);
-  }
-  // alert("after onAuthStateChanged call");
-
-  // alert("app: " + app +", auth: " + auth + ", provider: " + provider);
-   signBtn.onclick = ()=>{
-   let user = auth.currentUser;
-   if (user){
-     signOut(auth).then(()=>{
-       //successful sign out
-     }).catch((error)=>{
-       //unsuccessful sign out
-     });
-     
-   } else {
-     signInWithRedirect(auth, provider);
-   }
- }
-
-//alert(signBtn)
-
-   firebase= {
-     set: set,
-     ref: ref,
-     auth: auth,
-     db: db
-          }
- </script>
-  
-  <title>Game of Memory</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Entry</title>
 </head>
-  
-<body class="container">
-<div id="app_root">  
-  <button class="btn" id="signBtn"></button>
-  <dialog id="gover_dialog">
-    <div>
-      Game over!<br> Total score: 
-      <span id="tscore"></span>
-    </div>
-    <button id="replayBtn" class="btn btn-primary" onclick = "this.parentElement.open = false">play again</button>
-  </dialog>
-  <div id="container">
-    <div>
-      Match: <span id="guess"></span>
-    </div>
-       <div id="board">
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-         <div></div>
-       </div>
-    <div>
-      Score: 
-      <span id="score"></span>
-    </div>
-    <div>
-      Highest score: 
-      <span id="hScore">
-        
-      </span>
-    </div>
-  </div>
-</div>
-      <script>
-        var firebase;
-  function randint(low, high) {
-    
-    let num = Math.random();
-    num = num*high + 1;
-    num = Math.floor(num);
-    if(num < low) {
-    num =  randint(low, high);
-    }
-      return num
-  }
-  
-  function choose(arr, start){
-    start = (start)? start : 0;
-    let randIndex = randint(start, arr.length);
-    return arr[randIndex-1];    
-  }
-  
-  
-  var timerId;
-   
-  function countup(count, limit, oncount, oncountLimit){
-    if (count < limit) {
-      oncount(count);
-      timerId= setTimeout(()=>{
-        countup(count+1, limit, oncount, oncountLimit)}, 1000);
-    } else {
-      clearTimeout(timerId);
-      oncountLimit();
-    }
-      
-    }
-  
-  function show(elm){
-    elm.classList.add("show");
- }
+<body>
 
-  function hideAll(){
-    let nodes = board.children;
-    for (let i=0; i<nodes.length; i++){
-      nodes[i].classList.remove("show");
-      
-    }
-  };
-  
-  let guesses = [];
-  let scores = 0;
-  let canGuess = false;
-  let highestScore = localStorage.getItem("highestScore");
-  hScore.innerHTML = (highestScore)? highestScore : 0;
-  
-  let nodes = board.children;
-  let size = nodes.length;
-  for (let i=0; i<size; i++){
-      nodes[i].onclick = (e)=>{
-        if (!canGuess) return;
-        canGuess = false;
-        clearTimeout(timerId);
-        show(e.target);
-        if (e.target.textContent == guess.textContent) {
-          scores++;
-          score.innerHTML = scores;
-          guesses = [];
-          if (scores > +hScore.textContent){
-           
-            highestScore = scores;
-            localStorage.setItem("highestScore", highestScore);
-            if (firebase.auth.currentUser){
-              let userRef = firebase.ref(firebase.db, `users/${firebase.auth.currentUser.uid}`)
-            firebase.set(userRef, {highestScore: scores});
-         } else {
-              hScore.innerHTML = localStorage.getItem("highestScore");
-           }
-            
-          }
-          timerId= setTimeout(()=>{
-            hideAll();
-            play();
-            canGuess=false;
-            guess.innerHTML = "";
-          }, 1000);
-        } else {
-          timerId = setTimeout(()=>{
-            clearTimeout(timerId);
-            tscore.innerHTML = scores;
-            gover_dialog.open = true;
-          }, 1000);
+    <div class="entry-container">
+        <div class="logo"></div>
+        <h1>Welcome to Memory Game</h1>
+        <p>Test and train your memory!</p>
+        <button class="play-btn" onclick="startGame()">Play Now</button>
+    </div>
+
+    <script>
+        function startGame() {
+            window.location.href = "v1.html"; // Change this to your game page
         }
-        
-      };
-    }
-   
+    </script>
   
-  replayBtn.onclick = ()=>{
-    hideAll();
-    guesses = [];
-    scores= 0;
-    score.innerHTML = scores;
-    guess.innerHTML = "";
-    play();
-  }
-    
-    
-  
-  function play(){
-  gover_dialog.open=false;
-  countup(0, board.children.length, (i)=>{
-    show(board.children[i]);
-    let num = choose([1,2,3,4,5,6,7,8,9])
-    board.children[i].innerHTML = num;
-    guesses.push(num);
-  }, ()=>{
-    hideAll();
-    guess.innerHTML = choose(guesses);
-    canGuess = true;
-      });
-  canGuess = false;
-  }
-  play();
-  
+  <style>
+  /* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
 
-</script>
-   </body>
+/* Entry Page Container */
+.entry-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #1e1e1e;
+    box-shadow: 0px 0px 10px rgba(0, 188, 212, 0.5);
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Logo Styling */
+.logo {
+    font-size: 40px;
+    font-weight: bold;
+    color: #00bcd4;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    padding: 10px 20px;
+    border: 2px solid #00bcd4;
+    border-radius: 8px;
+    text-shadow: 0px 0px 10px rgba(0, 188, 212, 0.7);
+}
+
+/* Play Button */
+.play-btn {
+    background-color: #00bcd4;
+    color: #121212;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.play-btn:hover {
+    background-color: #0097a7;
+    transform: scale(1.05);
+}
+
+  </style>
+
+</body>
 </html>
