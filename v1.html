@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css"/>   
+  <script src="script.js" defer></script> 
+  <title>Game of Memory</title>
+</head>
+  
+<body>
+  <hr>
+  <div id="countdown" class="countdown-container">3</div>
+
+  <div class="header">
+    <span class="logo"></span>
+  </div>
+  <hr>
+  
+  <dialog id="gover_dialog">
+    <div>
+      Game over!<br> Total score: 
+      <span id="tscore"></span>
+    </div>
+    <button id="replayBtn" class="btn btn-primary" onclick = "this.parentElement.open = false">play again</button>
+  </dialog>
+  
+    <div class="guess-container">
+      <p id="correct_status">✓</p>
+      <p>Match: <span id="guess"></span></p>
+      
+    </div>
+  
+     <div id="board" class="game-board">
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+         <div></div>
+     </div>
+    
+  <div class="score-container">
+    <p>Score: <span id="score"></span></p>
+    <p>Highest score: <span id="hScore"></span></p>
+  </div>
+  
+  <footer>
+    <small>..from Mainafly</small>
+    <hr>
+    <small>©memorygame.mainafly.com 2025</small>
+  </footer>
+   </body>
+</html>
