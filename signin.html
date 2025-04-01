@@ -1,76 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-signin-client_id" content="707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com">
-    <title>Sign In</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-   
-</head>
-<body>
-  <div id = "error"></div>
-    <div>
-        <h1>Sign In</h1>
-<div id="g_id_onload"
-     data-client_id="707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com"
-     data-context="signin"
-     data-ux_mode="redirect"
-     data-login_uri="https://memory.mainafly.com/signin.html"
-     data-callback="onSignIn"
-     data-auto_select="true"
-     data-itp_support="true">
-</div>
-
-<div class="g_id_signin"
-     data-type="standard"
-     data-shape="rectangular"
-     data-theme="outline"
-     data-text="signin_with"
-     data-size="large"
-     data-logo_alignment="left">
-</div>
-        <div id="info"> Basic User Info: </div>
-        <img id="photo">
-    </div>
-    
+<html>
+  <body>
+    <script src="https://accounts.google.com/gsi/client" async></script>
     <script>
-    
-    function onSignIn(googleUser) {
-      alert(googleUser.getBasicProfile());
-        try {
-        var profile = googleUser.getBasicProfile();
-        info.innerHTML += 'ID: ' + profile.getId() +"<br>"; // Do not send to your backend! Use an ID token instead.
-        info.innerHTML += 'Name: ' + profile.getName() +"<br>";
-        photo.src = profile.getImageUrl();
-        info.innerHTML += profile.getEmail(); // This is null if the 'email' scope is not present
-      } catch(e) {
-        error.innerHTML = "error: " + e.message;
-        setTimeout(_ => error.innerHTML = "", 2000)
+      function handleCredentialResponse(response) {
+          alert(response.credential);
+        console.log("Encoded JWT ID token: " + response.credential);
       }
-    }
-       /* const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-        
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        
-        document.getElementById("googleSignIn").addEventListener("click", () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider)
-                .then(result => {
-                    alert(`Welcome, ${result.user.displayName}`);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }); */
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id: "707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com",
+          callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+          document.getElementById("buttonDiv"),
+          { theme: "outline", size: "large" }  // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+      }
     </script>
-</body>
+    <div id="buttonDiv"></div>
+  </body>
 </html>
