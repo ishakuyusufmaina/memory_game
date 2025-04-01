@@ -4,17 +4,25 @@
 <head>
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com">
   <link rel="stylesheet" href="style.css"/>   
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="script.js" defer></script> 
   <title>Game of Memory</title>
 </head>
   
 <body>
-  <hr>
+  <div id="g_id_onload"
+            data-client_id="707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com
+            data-auto_select="true"
+            data-callback="onSignIn"> 
+  </div>
+  <hr> 
   <div id="countdown" class="countdown-container">3</div>
 
   <div class="header">
     <span class="logo"></span>
+    <div><label>LABEL</label> X</div>
   </div>
   <hr>
   
@@ -54,5 +62,15 @@
     <hr>
     <small>©memorygame.mainafly.com 2025</small>
   </footer>
+
+  <script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+  </script>
    </body>
 </html>
