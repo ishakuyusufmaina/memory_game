@@ -13,19 +13,20 @@
     <div>
         <h1>Sign In</h1>
         <div class="g-signin2" data-onsuccess="onSignIn"></div> 
-        <div id="info"></div>
+        <div id="info">Basic Information: </div>
         <img id="photo">
     </div>
     
     <script>
     
     function onSignIn(googleUser) {
-      try {
+      alert(googleUser.getBasicProfile().getEmail());
+        try {
         var profile = googleUser.getBasicProfile();
-        info.innerHTML = 'ID: ' + profile.getId() +"<br>"; // Do not send to your backend! Use an ID token instead.
-        info.innerHTML = 'Name: ' + profile.getName() +"<br>";
+        info.innerHTML += 'ID: ' + profile.getId() +"<br>"; // Do not send to your backend! Use an ID token instead.
+        info.innerHTML += 'Name: ' + profile.getName() +"<br>";
         photo.src = profile.getImageUrl();
-        info.innerHTML = profile.getEmail(); // This is null if the 'email' scope is not present
+        info.innerHTML += profile.getEmail(); // This is null if the 'email' scope is not present
       } catch(e) {
         error.innerHTML = "error: " + e.message;
         setTimeout(_ => error.innerHTML = "", 2000)
