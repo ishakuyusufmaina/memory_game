@@ -32,10 +32,10 @@
    const auth = getAuth(app);
    const provider= new GoogleAuthProvider();
    const db = getDatabase(app);
-//alert("after initialization");
+
       
       function handleCredentialResponse(response) {
-         // alert(response.credential);
+          alert(response.credential);
         console.log("Encoded JWT ID token: " + response.credential);
      
       
