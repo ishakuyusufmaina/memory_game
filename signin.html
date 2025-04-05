@@ -33,7 +33,7 @@
               const credential = GoogleAuthProvider.credential(idToken);
               const result = await signInWithCredential(auth, credential);
               localStorage.setItem("email", user.email);
-              window.location.href = "entry.html";
+              window.location.href = "index.html";
               user.innerHTML = `
               Email: ${result.user.email}</br>
               Name: ${result.user.displayName}`;
