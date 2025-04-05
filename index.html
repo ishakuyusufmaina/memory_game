@@ -6,8 +6,10 @@
     <title>Game Entry</title>
 </head>
 <body>
+    
 
     <div class="entry-container">
+        <div id="user"></div>
         <div class="logo"></div>
         <h1>Welcome to Memory Game</h1>
         <p>Test and train your memory!</p>
@@ -15,6 +17,7 @@
     </div>
 
     <script>
+        user.innerHTML = localStorage.getItem("email");
         function startGame() {
             window.location.href = "v1.html"; // Change this to your game page
         }
