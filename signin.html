@@ -47,9 +47,9 @@
         
           let userPromise = new Promise(resolve=> onAuthStateChanged(auth, user=> resolve(user)));
           
-        msg.innerHTML = "Please wait...";
+       // msg.innerHTML = "Please wait...";
              let user = await userPromise;
-        msg.innerHTML = "";
+    //    msg.innerHTML = "";
         msg.style.display = "none";
               if (user) {//user has signed in
                   localStorage.setItem("email", user.email);
@@ -72,7 +72,7 @@
               }
       }
     </script>
-   <div id="msg"></div>
+   <div id="msg">Please wait...</div>
     <div id="buttonDiv"></div>
     <div id="error">
       
