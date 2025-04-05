@@ -42,10 +42,14 @@
 
           // `googleUser` from the onsuccess Google Sign In callback.
   //  googUser = gapi.auth2.getAuthInstance().currentUser.get();
-  const credential = GoogleAuthProvider.credential(idToken);
-  const result = await signInWithCredential(auth, credential);
- 
-        alert(result);
+
+        try {
+        const credential = GoogleAuthProvider.credential(idToken);
+        const result = await signInWithCredential(auth, credential);
+        } catch (e) {
+          error.innerHTML = e.message;
+        }
+
 
      }
       window.onload = function () {
@@ -61,5 +65,8 @@
       }
     </script>
     <div id="buttonDiv"></div>
+    <div id="error">
+      Error
+    </div>
   </body>
 </html>
