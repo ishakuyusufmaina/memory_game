@@ -43,7 +43,7 @@
       }
       window.onload = async function () {
        try {
-          let user = new Promise(resolve=> onAuthStateChanged(auth, user=> resolve(user)));
+          let userPromise = new Promise(resolve=> onAuthStateChanged(auth, user=> resolve(user)));
               
              let user = await userPromise;
               if (user) {//user has signed in
@@ -61,7 +61,7 @@
                   );
                   google.accounts.id.prompt(); // also display the One Tap dialog
               }
-       }        catch(e){
+       }    catch(e){
                error.innerHTML = e.message;
               }
       }
