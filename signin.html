@@ -33,31 +33,21 @@
    const provider= new GoogleAuthProvider();
    const db = getDatabase(app);
 
-      
-      function handleCredentialResponse(response) {
+      async   function handleCredentialResponse(response) {
           alert(response.credential);
         console.log("Encoded JWT ID token: " + response.credential);
      
       
       const idToken = response.credential;
-  const credential = provider.credential(idToken);
 
-  // Sign in with credential from the Google user.
-  signInWithCredential(auth, credential).then(user=>{
-    alert(user.email);
-  }).catch((error) => {
-    alert("error");
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The credential that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
-      
-      }
+          // `googleUser` from the onsuccess Google Sign In callback.
+  //  googUser = gapi.auth2.getAuthInstance().currentUser.get();
+  const credential = GoogleAuthProvider.credential(idToken);
+  const result = await signInWithCredential(auth, credential);
+ 
+        alert(result);
+
+     }
       window.onload = function () {
         google.accounts.id.initialize({
           client_id: "707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com",
