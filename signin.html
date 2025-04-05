@@ -1,78 +1,77 @@
 <html>
+<head> 
+ <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+</head>
   <body>
     <script src="https://accounts.google.com/gsi/client" async></script>
     <script type="module" >
-  
-    // alert("b4 importation");
   // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
-  import {getAuth, GoogleAuthProvider, signInWithCredential, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-   import {getDatabase, set, ref, onValue, child, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-//alert("after importation");
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-  apiKey: "AIzaSyCoBXilVjbiqy4jaNLoZyLvrwZZYJepock",
-  authDomain: "memory-mainafly.firebaseapp.com",
-  projectId: "memory-mainafly",
-  storageBucket: "memory-mainafly.firebasestorage.app",
-  messagingSenderId: "707099086296",
-  appId: "1:707099086296:web:eccec04bb938249911f6ad",
-  measurementId: "G-JP3GZ9YFBP"
-};
-
-     //alert("before initialization");
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-   const auth = getAuth(app);
-   const provider= new GoogleAuthProvider();
-   const db = getDatabase(app);
-
-      async   function handleCredentialResponse(response) {
-          alert(response.credential);
-        console.log("Encoded JWT ID token: " + response.credential);
-     
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+      import {getAuth, GoogleAuthProvider, signInWithCredential, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+     // import {getDatabase, set, ref, onValue, child, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+      const firebaseConfig = {
+          apiKey: "AIzaSyCoBXilVjbiqy4jaNLoZyLvrwZZYJepock",
+          authDomain: "memory-mainafly.firebaseapp.com",
+          projectId: "memory-mainafly",
+          storageBucket: "memory-mainafly.firebasestorage.app",
+          messagingSenderId: "707099086296",
+          appId: "1:707099086296:web:eccec04bb938249911f6ad",
+          measurementId: "G-JP3GZ9YFBP"
+      };
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth(app);
+      const provider= new GoogleAuthProvider();
+      //const db = getDatabase(app);
       
-      const idToken = response.credential;
-
-          // `googleUser` from the onsuccess Google Sign In callback.
-  //  googUser = gapi.auth2.getAuthInstance().currentUser.get();
-
-        try {
-        const credential = GoogleAuthProvider.credential(idToken);
-        const result = await signInWithCredential(auth, credential);
-          user.innerHTML = `
-          Email: ${result.user.email}</br>
-          Name: ${result.user.displayName}
-          `;
-        } catch (e) {
-          error.innerHTML = e.message;
-        }
-
-
-     }
-      window.onload = function () {
-        google.accounts.id.initialize({
-          client_id: "707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com",
-          callback: handleCredentialResponse
-        });
-        google.accounts.id.renderButton(
-          document.getElementById("buttonDiv"),
-          { theme: "outline", size: "large" }  // customization attributes
-        );
-        google.accounts.id.prompt(); // also display the One Tap dialog
+      async function handleCredentialResponse(response) {
+          const idToken = response.credential;
+          try {
+              const credential = GoogleAuthProvider.credential(idToken);
+              const result = await signInWithCredential(auth, credential);
+              localStorage.setItem("email", user.email);
+              window.location.href = "entry.html";
+              user.innerHTML = `
+              Email: ${result.user.email}</br>
+              Name: ${result.user.displayName}`;
+          } catch (e) {
+              error.innerHTML = e.message;
+          }
+      }
+      window.onload = async function () {
+       try {
+          let user = new Promise(resolve=> onAuthStateChanged(auth, user=> resolve(user)));
+              
+             let user = await userPromise;
+              if (user) {//user has signed in
+                  localStorage.setItem("email", user.email);
+                  window.location.href = "entry.html";
+              }
+              else {
+                  google.accounts.id.initialize({
+                      client_id: "707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com",
+                      callback: handleCredentialResponse
+                  });
+                  google.accounts.id.renderButton(
+                  document.getElementById("buttonDiv"),
+                  { theme: "outline", size: "large" }  // customization attributes
+                  );
+                  google.accounts.id.prompt(); // also display the One Tap dialog
+              }
+       }        catch(e){
+               error.innerHTML = e.message;
+              }
       }
     </script>
     <div id="buttonDiv"></div>
     <div id="error">
-      Error
+      
     </div>
     <div id="user">
-      user info 
+     
     </div>
   </body>
 </html>
