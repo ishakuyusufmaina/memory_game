@@ -1,10 +1,15 @@
 var playData = localStorage.getItem("playData");
-playData = playData? JSON.parse(playData) : {
+
+try {
+    playData = playData? JSON.parse(playData) : {
     substandardLevel: 1,
     standardLevel: 5,
     score: 0
+    }
+} catch(e) {
+    alert(e.message);
 }
-//alert("sc");
+alert();
 async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     let promisedUser = new Promise(resolve=>onAuthStateChanged(auth, user=> resolve(user)))
     let user = await promisedUser;
