@@ -1,26 +1,20 @@
-alert();
 var playData = localStorage.getItem("playData");
-
-try {
-    playData = playData? JSON.parse(playData) : {
+playData = playData? JSON.parse(playData) : {
     substandardLevel: 1,
     standardLevel: 5,
     score: 0
-    }
-} catch(e) {
-    alert(e.message);
 }
-//alert();
-async function init(db, doc, runTransaction, auth, onAuthStateChanged){
+async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     let promisedUser = new Promise(resolve=>onAuthStateChanged(auth, user=> resolve(user)))
     let user = await promisedUser;
-    if (!user){
+    /*if (!user){
         window.location.href = "signin.html";
         return;
-    }
+    }*/
+    
     //at this level, there exists a user
-    let email = user.email;
-    let name = user.displayName;
+    let email =  "email"//user.email;
+    let name = "name"//user.displayName;
     let globalPlayData = await runTransaction(db, async transaction=>{
         let playDoc = await transaction.get(doc(db, "players", email));
         if (!playDoc.exists())
@@ -32,8 +26,8 @@ async function init(db, doc, runTransaction, auth, onAuthStateChanged){
         });
         return playDoc.data();
     }); 
-    playData.standardLevel = globalPlayData.level;
-    onAuthStateChanged(auth, u => if (!u) window.location.href = "signin.html")
+    playData.standardLevel = +globalPlayData.level;
+    onAuthStateChanged(auth, user=> {if (!user) window.location.href = "signin.html"})
     presentLevelSelection();
     
     
