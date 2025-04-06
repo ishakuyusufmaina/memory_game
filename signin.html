@@ -23,8 +23,8 @@
       };
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
-      try{const auth = getAuth(app)}catch(e){alert(e.message)}
-      alert();
+      const auth = getAuth(app);
+      
      const provider= new GoogleAuthProvider();
       //const db = getDatabase(app);
       
