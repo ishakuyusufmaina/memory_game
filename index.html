@@ -52,6 +52,7 @@
     const db = getFirestore(app);
 
     window.onload = async _=>{
+        alert();
          try {await init(db, doc, runTransaction, auth, onAuthStateChanged)}
         catch(e){alert(e.message)}
         logout.onclick = e=> {
