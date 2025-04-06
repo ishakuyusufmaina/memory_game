@@ -4,6 +4,7 @@ playData = playData? JSON.parse(playData) : {
     standardLevel: 5,
     score: 0
 }
+alert("sc");
 async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     let promisedUser = new Promise(resolve=>onAuthStateChanged(auth, user=> resolve(user)))
     let user = await promisedUser;
