@@ -15,15 +15,15 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     let email = user.email;
     let name = user.displayName;
     let globalPlayData = await runTransaction(db, async transaction=>{
-        let doc = await transaction.get(db, doc("players", email));
-        if (!doc.exists())
-        transaction.set(doc("players", email), {
+        let playDoc = await transaction.get(doc(db, "players", email));
+        if (!playDoc.exists())
+        transaction.set(doc(db, "players", email), {
             email: email,
             name: name,
             level: 1,
             score: 0
         });
-        return doc.data();
+        return playDoc.data();
     }); 
     onAuthStateChanged(auth, user=> {if (!user) window.loaction.href = "signin.html"})
     presentLevelSelection();
