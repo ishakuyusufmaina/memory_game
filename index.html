@@ -27,7 +27,7 @@
             <option value="1">LEVEL 1</option>
             <option value="2">LEVEL 2</option>
         </select>
-        <button class="play-btn" onclick="startGame()">Play Now</button>
+        <button class="play-btn" id="play" onclick="startGame()">Play Now</button>
         
     </div>
 
@@ -61,7 +61,7 @@
         document.getElementById("close").onclick = _ => document.querySelector(".menu-container").classList.remove("show");
         menu.onclick = _ => document.querySelector(".menu-container").classList.add("show");
     }
-    function startGame() {
+    document.getElementById("play").onclick = ()=>{
             //localStorage.setItem("level", level.value);
             window.location.href = "v1.html"; // Change this to your game page
     }
