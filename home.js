@@ -7,14 +7,16 @@ playData = playData? JSON.parse(playData) : {
 async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     let promisedUser = new Promise(resolve=>onAuthStateChanged(auth, user=> resolve(user)))
     let user = await promisedUser;
-    /*if (!user){
+    if (!user){
         window.location.href = "signin.html";
         return;
-    }*/
+    }
     
     //at this level, there exists a user
-    let email =  "email"//user.email;
-    let name = "name"//user.displayName;
+    let email =  user.email;
+    let name = user.displayName;
+    let levelSelect = document.getElementById("level");
+    levelSelect.innerHTML = "<option>Please wait...</option>";
     let globalPlayData = await runTransaction(db, async transaction=>{
         let playDoc = await transaction.get(doc(db, "players", email));
         if (!playDoc.exists())
@@ -34,7 +36,6 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     function presentLevelSelection(){
         let level = playData.standardLevel;
         let currLevel = playData.substandardLevel;
-        let levelSelect = document.getElementById("level");
         levelSelect.innerHTML = "";
         for (let i=1; i<=level; i++){
             let option = document.createElement("option");
