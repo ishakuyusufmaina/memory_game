@@ -48,21 +48,22 @@
       };
       const app = initializeApp(firebaseConfig);
       const analytics = getAnalytics(app);
-     try { const auth = getAuth(app) } catch(e){alert(e.message);}
+      const auth = getAuth(app);
     const db = getFirestore(app);
-    alert();
-    window.onload = _=>{
-         init(db, doc, runTransaction, auth, onAuthStateChanged);
+
+    window.onload = async _=>{
+         try {await init(db, doc, runTransaction, auth, onAuthStateChanged)}
+        catch(e){alert(e.message)}
+        logout.onclick = e=> {
+            try {signOut(auth);} catch(e) {alert(e.message)}
+        }
+        document.getElementById("close").onclick = _ => document.querySelector(".menu-container").classList.remove("show");
+        menu.onclick = _ => document.querySelector(".menu-container").classList.add("show");
     }
-    logout.onclick = e=> signOut(auth);
-    document.getElementById("close").onclick = _ => document.querySelector(".menu-container").classList.remove("show");
-    menu.onclick = _ => document.querySelector(".menu-container").classList.add("show");
-    
-   // alert(localStorage.getItem("mode"));
-        function startGame() {
+    function startGame() {
             //localStorage.setItem("level", level.value);
             window.location.href = "v1.html"; // Change this to your game page
-        }
+    }
     </script>
   
   <style>
