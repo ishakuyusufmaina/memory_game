@@ -3,27 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=leaderboard" />
     <title>Game Entry</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js" defer></script>
 </head>
 <body>
-    
-
+   <button id="menu">&#9776;</button>
+    <div class="menu-container">
+            <button id="close">X</button> Menu
+            <hr>
+            <ul>
+                <li>Leader board (coming soon..)</li>
+                <li id="logout">Logout <span id="username"></span></li>
+            </ul>
+        </div>
     <div class="entry-container">
-        <div id="user"></div>
-        <div class="logo"></div>
+        <!--div class="lead"><span class="material-symbols-outlined">leaderboard</span></div-->
+        <!--div class="user">user</div-->
         <h1>Welcome to Memory Game</h1>
         <p>Test and train your memory!</p>
+        <select id="level">
+            <option value="1">LEVEL 1</option>
+            <option value="2">LEVEL 2</option>
+        </select>
         <button class="play-btn" onclick="startGame()">Play Now</button>
+        
     </div>
 
-    <script>
-        user.innerHTML = localStorage.getItem("email");
+    <script type="module" defer>
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
+  import {getFirestore, doc, runTransaction} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+  import {getAuth, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+     // import {getDatabase, set, ref, onValue, child, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+      const firebaseConfig = {
+          apiKey: "AIzaSyCoBXilVjbiqy4jaNLoZyLvrwZZYJepock",
+          authDomain: "memory-mainafly.firebaseapp.com",
+          projectId: "memory-mainafly",
+          storageBucket: "memory-mainafly.firebasestorage.app",
+          messagingSenderId: "707099086296",
+          appId: "1:707099086296:web:eccec04bb938249911f6ad",
+          measurementId: "G-JP3GZ9YFBP"
+      };
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+     try { const auth = getAuth(app) } catch(e){alert(e.message);}
+    const db = getFirestore(app);
+    
+    window.onload = _=>{
+         init(db, doc, runTransaction, auth, onAuthStateChanged);
+    }
+    logout.onclick = e=> signOut(auth);
+    document.getElementById("close").onclick = _ => document.querySelector(".menu-container").classList.remove("show");
+    menu.onclick = _ => document.querySelector(".menu-container").classList.add("show");
+    
+   // alert(localStorage.getItem("mode"));
         function startGame() {
+            //localStorage.setItem("level", level.value);
             window.location.href = "v1.html"; // Change this to your game page
         }
     </script>
   
   <style>
+    select  {
+        color: white;
+    }
   /* General Page Styling */
 body {
     font-family: Arial, sans-serif;
@@ -36,6 +81,52 @@ body {
     justify-content: center;
     height: 100vh;
 }
+    
+    .menu-container {
+        height: 100%;
+        position: absolute;
+        right: 0;
+       // display: none;
+        z-index: 10;
+        transform: scaleX(0);
+        text-align: left;
+        background: inherit;
+        transpancy: 0.7;
+        border: 1px solid white;
+        top: 0;
+        padding-left: 0;
+        overflow: auto;
+
+    }
+    .menu-container li {
+        margin: 10px;
+        margin-left: 0;
+        border-bottom: 1px solid white;
+        background-color: #00bcd4;
+        overflow: auto;
+
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+
+    }
+    .menu-container button {
+        border: none;
+        color: white;
+        background: inherit;
+        font-size: 20px;
+    }
+    .menu-container.show {
+        transition: transform 0.2s ease-out;
+        transform: scaleX(100%);
+        
+    }
+
 
 /* Entry Page Container */
 .entry-container {
@@ -49,7 +140,29 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 188, 212, 0.5);
     width: 90%;
     max-width: 400px;
+    position: relative;
+    
 }
+    #menu {
+        position: absolute;
+        right:0;
+        top: 0;
+        background: inherit;
+        color: inherit;
+        border: none;
+        font-size: 40px;
+    font-weight: bold;
+    }
+    .lead{
+       position: absolute;
+        left:0;
+        top: 0;
+        background: inherit;
+        color: inherit;
+        border: none;
+        font-size: 40px;
+    font-weight: bold; 
+    }
 
 /* Logo Styling */
 .logo {
@@ -63,6 +176,17 @@ body {
     border-radius: 8px;
     text-shadow: 0px 0px 10px rgba(0, 188, 212, 0.7);
 }
+    
+    .user {
+        border-radius: 50%;
+        border: 1px solid white;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+        height:50px;
+        width: 50px;
+    }
+        
 
 /* Play Button */
 .play-btn {
