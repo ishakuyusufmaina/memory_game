@@ -53,8 +53,8 @@
 
     window.onload = async _=>{
         //alert();
-         try {await init(db, doc, runTransaction, auth, onAuthStateChanged)}
-        catch(e){alert(e.message)}
+         //try {await init(db, doc, runTransaction, auth, onAuthStateChanged)}
+       // catch(e){alert(e.message)}
         logout.onclick = e=> {
             try {signOut(auth);} catch(e) {alert(e.message)}
         }
