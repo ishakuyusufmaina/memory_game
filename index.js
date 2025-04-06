@@ -25,7 +25,8 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
         });
         return playDoc.data();
     }); 
-    onAuthStateChanged(auth, user=> {if (!user) window.loaction.href = "signin.html"})
+    playData.standardLevel = globalPlayData.level;
+    onAuthStateChanged(auth, u => if (!u) window.location.href = "signin.html")
     presentLevelSelection();
     
     
