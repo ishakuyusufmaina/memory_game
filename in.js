@@ -1,3 +1,4 @@
+alert();
 var playData = localStorage.getItem("playData");
 
 try {
