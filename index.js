@@ -16,7 +16,6 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     let name = user.displayName;
     let globalPlayData = await runTransaction(db, async transaction=>{
         let playDoc = await transaction.get(doc(db, "players", email));
-        alert ();
         if (!playDoc.exists())
         transaction.set(doc(db, "players", email), {
             email: email,
