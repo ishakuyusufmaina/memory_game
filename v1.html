@@ -16,7 +16,7 @@
   <div id="countdown" class="countdown-container">...</div>
 
   <div class="header">
-    <span class="back">&#8701;</span>
+    <span class="back" id="back">&#8701;</span>
     <div id="level-container">
       <label>Level</label> <span id="level">X</span>
       <button id="save" style="display:none">save</button>
@@ -85,6 +85,7 @@
     window.onload = async _=>{
         try {await init(db, doc, setDoc, onAuthStateChanged, auth)}
        catch(e){alert(e.message)}
+      document.getElementById("back").onclick = e=> window.location.href = "index.html";
         /*logout.onclick = e=> {
             try {signOut(auth);} catch(e) {alert(e.message)}
         }
