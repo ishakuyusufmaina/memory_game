@@ -3,7 +3,7 @@ const playData = JSON.parse(localStorage.getItem("playData"));
 /*const playData = {
     substandardLevel: 4,
     standardLevel: 2,
-    score: 0
+    score: 0 
 }*/
 var scores = 0;
 
