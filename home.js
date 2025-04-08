@@ -16,6 +16,8 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     localStorage.setItem("user", JSON.stringify(user));
     let email =  user.email;
     let name = user.displayName;
+    user = JSON.parse(localStorage.getItem("user"));
+    alert(user.email);
     let levelSelect = document.getElementById("level");
     document.getElementById("username").innerHTML = name;
     levelSelect.innerHTML = "<option>Please wait...</option>";
