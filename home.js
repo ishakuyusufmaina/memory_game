@@ -34,6 +34,7 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     }); 
     playData.standardLevel = +globalPlayData.level;
     playData.score = +globalPlayData.score;
+    localStorage.setItem("playData", JSON.stringify(playData));
     onAuthStateChanged(auth, user=> {if (!user) window.location.href = "signin.html"})
     presentLevelSelection();
     
