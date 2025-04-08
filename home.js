@@ -13,9 +13,11 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     }
     
     //at this level, there exists a user
+    localStorage.setItem("user", JSON.stringify(user));
     let email =  user.email;
     let name = user.displayName;
     let levelSelect = document.getElementById("level");
+    document.getElementById("username").innerHTML = name;
     levelSelect.innerHTML = "<option>Please wait...</option>";
     let globalPlayData = await runTransaction(db, async transaction=>{
         let playDoc = await transaction.get(doc(db, "players", email));
