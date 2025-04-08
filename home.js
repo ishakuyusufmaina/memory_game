@@ -1,7 +1,7 @@
 var playData = localStorage.getItem("playData");
 playData = playData? JSON.parse(playData) : {
     substandardLevel: 1,
-    standardLevel: 5,
+    standardLevel: 1,
     score: 0
 }
 async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
@@ -29,6 +29,7 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
         return playDoc.data();
     }); 
     playData.standardLevel = +globalPlayData.level;
+    playData.score = +globalPlayData.score;
     onAuthStateChanged(auth, user=> {if (!user) window.location.href = "signin.html"})
     presentLevelSelection();
     
