@@ -4,25 +4,23 @@
 <head>
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-signin-client_id" content="707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com">
   <link rel="stylesheet" href="style.css"/>   
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="players.js"></script>
   <script src="script.js" defer></script> 
   <title>Game of Memory</title>
 </head>
   
 <body>
-  <div id="g_id_onload"
-            data-client_id="707099086296-ashsakkk7epp3erru62ske4k7a9oinbs.apps.googleusercontent.com
-            data-auto_select="true"
-            data-callback="onSignIn"> 
-  </div>
-  <hr> 
-  <div id="countdown" class="countdown-container">3</div>
+  <hr>
+
+  <div id="countdown" class="countdown-container">...</div>
 
   <div class="header">
-    <span class="logo"></span>
-    <div><label>LABEL</label> X</div>
+    <span class="back">&#8701;</span>
+    <div id="level-container">
+      <label>Level</label> <span id="level">X</span>
+      <button id="save" style="display:none">save</button>
+    </div>
   </div>
   <hr>
   
@@ -54,7 +52,7 @@
     
   <div class="score-container">
     <p>Score: <span id="score"></span></p>
-    <p>Highest score: <span id="hScore"></span></p>
+    <!--p>Highest score: <span id="hScore"></span></p-->
   </div>
   
   <footer>
@@ -62,15 +60,90 @@
     <hr>
     <small>©memorygame.mainafly.com 2025</small>
   </footer>
+  
+  
+  <script type="module" defer>
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+  import {getFirestore, doc, setDoc} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+  import {getAuth, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+     // import {getDatabase, set, ref, onValue, child, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+      const firebaseConfig = {
+          apiKey: "AIzaSyCoBXilVjbiqy4jaNLoZyLvrwZZYJepock",
+          authDomain: "memory-mainafly.firebaseapp.com",
+          projectId: "memory-mainafly",
+          storageBucket: "memory-mainafly.firebasestorage.app",
+          messagingSenderId: "707099086296",
+          appId: "1:707099086296:web:eccec04bb938249911f6ad",
+          measurementId: "G-JP3GZ9YFBP"
+      };
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth(app);
+    const db = getFirestore(app);
 
-  <script>
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    window.onload = async _=>{
+        try {await init(db, doc, setDoc, onAuthStateChanged, auth)}
+       catch(e){alert(e.message)}
+        /*logout.onclick = e=> {
+            try {signOut(auth);} catch(e) {alert(e.message)}
+        }
+        document.getElementById("close").onclick = _ => document.querySelector(".menu-container").classList.remove("show");
+        menu.onclick = _ => document.querySelector(".menu-container").classList.add("show");
+      */
     }
+  
+  save.onclick = e=>{
+    
+    save.style.display = "none";
+  }
   </script>
+  
+  
+  <style>
+  #save {
+ background-color: #2c2c2c; /* Green background */
+  color: white;              /* White text */
+  border: none;              /* No border */
+  //padding: 12px 24px;        /* Padding */
+  text-align: center;        /* Center text */
+  text-decoration: none;     /* No underline */
+  display: inline-block;     
+  font-size: 16px;           /* Font size */
+  border-radius: 8px;        /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow */
+  cursor: pointer;           /* Pointer cursor on hover */
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#save:hover {
+  background-color: #00bcd4; /* Darker green on hover */
+  transform: scale(1.05);    /* Slight zoom on hover */
+}
+
+#save:active{
+  transform: scale(0.97);    /* Press effect */
+}
+
+  .back {
+    font-weight: bold;
+    font-size: 30px;
+    display: flex;
+    border: 0.5px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 15px;
+    
+    
+  }
+  .back:hover {
+    background: #2c2c2c;
+  }
+  </style>
    </body>
 </html>
