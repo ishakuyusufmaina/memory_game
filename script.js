@@ -79,7 +79,7 @@ const resolveClick = async cell =>{
     if (cell.textContent == guess.textContent) {
         scores++;
         correct_status.classList.add("show");
-        correct_status.classList.remove("show");
+        setTimeout(e=>correct_status.classList.remove("show"), 1000);
         guesses = [];
         hideAll();
         //await play();
