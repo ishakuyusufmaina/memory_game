@@ -1,3 +1,34 @@
+//localStorage.setItem("highestScore", 0);
+const playData = JSON.parse(localStorage.getItem("playData"));
+/*const playData = {
+    substandardLevel: 4,
+    standardLevel: 2,
+    score: 0
+}*/
+var scores = 0;
+
+//var currentPlayer;
+var currentLevel = 1;
+const events = {
+    onGameover: (level, score)=>{}
+} 
+
+const elmById = id=>document.getElementById(id);
+
+//currentLevel = Number(localStorage.getItem("level"));
+function setPlayerByLevel (level){
+    while (level != currentPlayer.level) {
+        currentPlayer = currentPlayer.next;
+        if (!currentPlayer) {
+            alert("an error occured, please report to Maina");
+            break;
+        }
+        console.log(currentPlayer.level)
+    }
+}
+
+
+
 function randint(low, high) {
     let num = Math.random();
     num = num*high + 1;
@@ -7,27 +38,29 @@ function randint(low, high) {
     return num
 }
   
-function choose(arr, start){
-    start = (start)? start : 0;
-    let randIndex = randint(start, arr.length);
-    return arr[randIndex-1];
-}
-  
-let timerId;
-function countup(count, limit, oncount, oncountLimit){
-    if (count < limit) {
-      oncount(count);
-      timerId= setTimeout(()=>{
-          countup(count+1, limit, oncount, oncountLimit)}, 1000);
-    } else {
-        clearTimeout(timerId);
-        oncountLimit();
+
+function choose(arr){
+    function getRandomInt(start, end) {
+        return Math.floor(Math.random() * (end - start + 1)) + start;
     }
+    let randIndex = getRandomInt(0, arr.length-1);
+    return arr[randIndex];
 }
+
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
+    }
+    return arr;
+}
+
 
 function show(elm){
     elm.classList.add("show");
+    //click.click();
 }
+
 
 function hideAll(){
     let nodes = Array.from(board.children);
@@ -35,90 +68,136 @@ function hideAll(){
 }
   
 let guesses = [];
-let scores = 0;
-let canGuess = false;
-let highestScore = localStorage.getItem("highestScore");
-hScore.innerHTML = (highestScore)? highestScore : 0;
 let nodes = board.children;
 //modified on 26/Mar/2025
 Array.from(nodes).forEach(node => node.classList.add("cell"));
-let size = nodes.length;
-for (let i=0; i<size; i++){
-    nodes[i].onclick = (e)=>{
-        if (!canGuess) return;
-        canGuess = false;
-        clearTimeout(timerId);
-        show(e.target);
-        if (e.target.textContent == guess.textContent) {
-            scores++;
-            score.innerHTML = scores;
-            correct_status.classList.add("show");
-            setTimeout(_=> correct_status.classList.remove("show"), 1000);
-            guesses = [];
-            if (scores > +hScore.textContent){
-                highestScore = scores;
-                localStorage.setItem("highestScore", highestScore);
-                hScore.innerHTML = localStorage.getItem("highestScore");
-            }
-            timerId= setTimeout(()=>{
-                hideAll();
-                play();
-                canGuess=false;
-                guess.innerHTML = "";
-            }, 1000);
-        } else {
-            timerId = setTimeout(()=>{
-                clearTimeout(timerId);
-                tscore.innerHTML = scores;
-                gover_dialog.open = true;
-            }, 1000);
-        }
-    };
+
+const resolveClick = async cell =>{
+    let conti = true;
+    show(cell);
+    await wait(1000);
+    if (cell.textContent == guess.textContent) {
+        scores++;
+        correct_status.classList.add("show");
+        correct_status.classList.remove("show");
+        guesses = [];
+        hideAll();
+        //await play();
+        guess.innerHTML = "";
+        return conti;
+    } else {
+        Array.from(nodes).forEach(node=>show(node))
+        await wait(1000);
+        return false;
+    }
 }
-   
+
+
+
+//click.onclick= e=> e.target.play();
+
+async function resolveGameOver(){
+    let actionBtns = [replayBtn];
+    gover_dialog.open = true;
+    return new Promise(resolve=>actionBtns.forEach(btn=>btn.onclick=e=>{
+        gover_dialog.open = false;
+        resolve(e)
+    }))
+}
   
-replayBtn.onclick = ()=>{
+async function play(){
+    //uniqSeqPlay(); return;
     hideAll();
     guesses = [];
-    scores= 0;
-    score.innerHTML = scores;
     guess.innerHTML = "";
-    play();
-}
-    
-    
-  
-function play(){
-    gover_dialog.open=false;
-    countup(0, board.children.length, (i)=>{
-        show(board.children[i]);
-        let num = choose([1,2,3,4,5,6,7,8,9])
-        board.children[i].innerHTML = num;
-        guesses.push(num);
-    }, ()=>{
-        hideAll();
-        guess.innerHTML = choose(guesses);
-        canGuess = true;
-    });
-    canGuess = false;
-}
-
-//setTimeout(_=>play(), 1000);
-
-
-
-let count = 3;
-        const countdownElement = document.getElementById("countdown");
-
-        const countdownInterval = setInterval(() => {
-            count--;
-            if (count >= 0) {
-                countdownElement.textContent = count;
+     let cells = Array.from(board.children)
+    cells.forEach(cell=>cell.innerHTML = "");
+    let limit = currentPlayer.limit;
+    score.innerHTML = `${limit}/${scores}`;
+    if (scores >= limit){
+        currentPlayer = currentPlayer.next;
+        scores = 0;
+        //localStorage.setItem("highestScore", 0);
+    }
+    if (currentPlayer) {
+        if (currentPlayer.level > playData.standardLevel){
+            save.style.display = "inline-block";
+        }
+        elmById("level").innerHTML = currentPlayer.level;
+        //console.log(currentPlayer.level)
+        score.innerHTML = `${scores}/${currentPlayer.limit}`;
+        await currentPlayer.play();
+        let cellClicked = await new Promise(resolve =>cells.forEach(cell=>cell.onclick=e=>resolve(cell)));
+        let conti = await resolveClick(cellClicked);
+        if (conti)
+        await play();
+        else {//game over
+            events.onGameover();
+            conti = await resolveGameOver();
+            if (conti) {
+                scores = 0;
+                await play();
             }
-            if (count < 0) {
-                clearInterval(countdownInterval);
-                countdownElement.style.display = "none"; // Hide countdown after reaching 0
-                // You can trigger the game start here
-                play()
-            }
-        }, 1000);
+        }
+    }
+    else {
+        document.body.innerHTML = `
+        <h2>Congratulations!</h2>
+        Your working memory has superceded 
+        our memory game. But then, this is not 
+        the ultimate end of the journey of training and testing your memory. 
+        More advanced levels are on their way coming soon. 
+        Stay tune! <hr>
+        Kind regard,
+        <br><small>~Maina</small><br>
+        <a href="entry.html">HOME</a>
+        `;
+    }
+}
+
+const countdownElement = document.getElementById("countdown");
+async function countDown(count){
+    if (count){
+        countdownElement.textContent = count;
+        await wait(1000);
+        await countDown(count-1);
+    } else {
+        countdownElement.style.display = "none"
+        //await play();
+    }
+}
+//await countDown(3);
+async function wait(t){ return new Promise(resolve => setTimeout(_=>resolve(t), t)) }
+
+async function init(db, doc, setDoc, onAuthStateChanged, auth){
+    let user = JSON.parse(localStorage.getItem("user"));
+    let email = user.email;
+    let name = user.displayName;
+    scores = playData.score;
+    let currentLevel = playData.substandardLevel;
+   setPlayerByLevel(+currentLevel);
+    await countDown(3);
+     play();
+    
+   // onAuthStateChanged(auth, u=> if (!u) window.location.href="signin.html");
+   document.getElementById("save").onclick = async e =>{
+       let level = currentPlayer.level;
+       let score = scores;
+       e.target.innerHTML = "saving...";
+       e.target.disabled = true;
+       await setDoc(doc(db, "players", email), {
+           email: email,
+           name: name,
+           level: level,
+           score: score
+       });
+       playData.standardLevel = level;
+       playData.substandardLevel = level;
+       playData.score = scores;
+       localStorage.setItem("playData", JSON.stringify(playData));
+       e.target.innerHTML = "saved!";
+       setTimeout(()=>{e.target.disabled = false; e.target.innerHTML = "save"; e.target.style.display="none"}, 2000)
+   }
+}
+
+//await init();
