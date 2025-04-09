@@ -1,8 +1,11 @@
 var playData = localStorage.getItem("playData");
-playData = playData? JSON.parse(playData) : {
+if (!playData){
+    playData = {
     substandardLevel: 1,
     standardLevel: 1,
     score: 0
+    }
+    localStorage.setItem("playData", JSON.stringify(playData));
 }
 async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     let promisedUser = new Promise(resolve=>onAuthStateChanged(auth, user=> resolve(user)))
