@@ -54,6 +54,10 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
             playData.substandardLevel = Number(substdLevel);
             localStorage.setItem("playData", JSON.stringify(playData));
         }
+        document.getElementById("play").onclick = ()=>{
+            //localStorage.setItem("level", level.value);
+            window.location.href = "v1.html"; // Change this to your game page
+    }
         levelSelect.children[currLevel-1].selected = true;
     }
 }
