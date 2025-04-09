@@ -23,16 +23,23 @@
         <!--div class="lead"><span class="material-symbols-outlined">leaderboard</span></div-->
         <!--div class="user">user</div-->
         <h1>Welcome</h1>
+        <div style="background: purple; color: white; font-weight: bolder">
+            A problem is being fixed on the app 
+            coming back soon.
+            We apologize for any inconvenience 
+            this might cause 
+            <hr>~Maina
+        </div>
         <p>Test and train your memory 🧠!</p>
         <select id="level">
             <option value="1">LEVEL 1</option>
             <option value="2">LEVEL 2</option>
         </select>
-        <button class="play-btn" id="play" onclick="startGame()">Play Now</button>
+        <!-- button class="play-btn" id="play" onclick="startGame()">Play Now</button-->
         
     </div>
 
-    <script type="module" defer>
+    <script type="module" defer> /*
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
   import {getFirestore, doc, runTransaction} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
@@ -61,7 +68,7 @@
         }
         document.getElementById("close").onclick = _ => document.querySelector(".menu-container").classList.remove("show");
         menu.onclick = _ => document.querySelector(".menu-container").classList.add("show");
-    }
+    } */
    /* document.getElementById("play").onclick = ()=>{
             //localStorage.setItem("level", level.value);
             window.location.href = "v1.html"; // Change this to your game page
