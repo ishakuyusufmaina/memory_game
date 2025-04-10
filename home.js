@@ -71,6 +71,8 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
 }
 
 //init();
+
+/*
 dLevel: 1,
     standardLevel: 1,
     score: 0
@@ -142,3 +144,4 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
 }
 
 //init();
+*/
