@@ -126,7 +126,7 @@
 
     
  // import { query, orderBy, endAt } from "firebase/firestore";  
-try {
+//try {
   let playersRef = collection(db, "players");
   let q = query(playersRef, orderBy("level", "desc"), orderBy("score","desc"), limit(100));
   let playerDocs;
@@ -145,9 +145,9 @@ try {
   })
     addRowsToTable(players);
                                                               
-} catch(e){
+/*} catch(e){
   alert(e.message);
-}
+}*/
   //alert();
   </script>
 
