@@ -1,7 +1,5 @@
 var playData = localStorage.getItem("playData");
 playData= (playData)? playData : {
-    substandarvar playData = localStorage.getItem("playData");
-playData= (playData)? playData : {
     substandardLevel: 1,
     standardLevel: 1,
     score: 0
