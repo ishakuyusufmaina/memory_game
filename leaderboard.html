@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Leaderboard</title>
   <style>
     body {
@@ -123,7 +126,7 @@
 
     
  // import { query, orderBy, endAt } from "firebase/firestore";  
-
+try {
   let playersRef = collection(db, "players");
   let q = query(playersRef, orderBy("level", "desc"), orderBy("score","desc"), startAt(0), limit(100));
   let playerDocs;
@@ -137,9 +140,14 @@
       score: data.score,
       level: data.level
     });
-    addRowsToTable(players);
+    
     
   })
+    addRowsToTable(players);
+                                                              
+} catch(e){
+  alert(e.message);
+}
   //alert();
   </script>
 
