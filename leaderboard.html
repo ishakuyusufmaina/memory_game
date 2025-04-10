@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaderboard</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      height: 100vh;
+      position: relative;
+      overflow: auto;
+    }
+  header {
+    position: sticky;
+    top: 0px;
+    border-bottom: 0.5px solid white;
+    text-align: center;
+    position: relative;
+  }
+  header > a {
+    position: absolute;
+    left: 0;
+    color: white;
+  }
+  
+    
+   
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #1e1e1e;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #333;
+      text-align: left;
+    }
+
+    th {
+      background-color: #333;
+    }
+
+    tr:hover {
+      background-color: #2a2a2a;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html">Home</a>
+    <h1>Leaderboard</h1>
+  </header>
+  <table id="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+        <th>Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be inserted here -->
+    </tbody>
+  </table>
+
+  <script type="module" defer>
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+  import {getFirestore, query, startAt, collection, getDocs, orderBy, limit} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+  import {getAuth, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+     // import {getDatabase, set, ref, onValue, child, get } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+      const firebaseConfig = {
+          apiKey: "AIzaSyCoBXilVjbiqy4jaNLoZyLvrwZZYJepock",
+          authDomain: "memory-mainafly.firebaseapp.com",
+          projectId: "memory-mainafly",
+          storageBucket: "memory-mainafly.firebasestorage.app",
+          messagingSenderId: "707099086296",
+          appId: "1:707099086296:web:eccec04bb938249911f6ad",
+          measurementId: "G-JP3GZ9YFBP"
+      };
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth(app);
+    const db = getFirestore(app);
+
+  
+    function addRowsToTable(dataArray) {
+      const tableBody = document.getElementById("table").querySelector("tbody");
+      dataArray.forEach(item => {
+        const row = document.createElement("tr");
+
+        const nameCell = document.createElement("td");
+        nameCell.textContent = item.name;
+
+        const scoreCell = document.createElement("td");
+        scoreCell.textContent = item.score;
+
+        const levelCell = document.createElement("td");
+        levelCell.textContent = item.level;
+
+        row.appendChild(nameCell);
+        row.appendChild(scoreCell);
+        row.appendChild(levelCell);
+
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Example usage
+    const players = [
+      /*{ name: "Alice", score: 120, level: "Easy" },
+      { name: "Bob", score: 200, level: "Medium" },
+      { name: "Charlie", score: 300, level: "Hard" }*/
+    ];
+
+    
+ // import { query, orderBy, endAt } from "firebase/firestore";  
+
+  let playersRef = collection(db, "players");
+  let q = query(playersRef, orderBy("level", "desc"), orderBy("score","desc"), startAt(0), limit(100));
+  let playerDocs;
+  document.getElementById("table").innerHTML = "please wait..."
+  playerDocs = await getDocs(q);
+  document.getElementById("table").innerHTML = ""
+  playerDocs.forEach(doc => {
+    let data = doc.data();
+    players.push({
+      name: data.name,
+      score: data.score,
+      level: data.level
+    });
+    addRowsToTable(players);
+    
+  })
+  //alert();
+  </script>
+
+</body>
+</html>
