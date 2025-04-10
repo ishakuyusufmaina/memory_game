@@ -128,7 +128,7 @@
  // import { query, orderBy, endAt } from "firebase/firestore";  
 try {
   let playersRef = collection(db, "players");
-  let q = query(playersRef, orderBy("level", "desc"), orderBy("score","desc"), startAt(0), limit(100));
+  let q = query(playersRef, orderBy("level", "desc"), orderBy("score","desc"), limit(100));
   let playerDocs;
   document.getElementById("table").innerHTML = "please wait..."
   playerDocs = await getDocs(q);
