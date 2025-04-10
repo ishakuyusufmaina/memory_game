@@ -1,6 +1,5 @@
 var playData = localStorage.getItem("playData");
 playData= (playData)? playData : {
-    playData = {
     substandardLevel: 1,
     standardLevel: 1,
     score: 0
@@ -61,7 +60,8 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
             //localStorage.setItem("level", level.value);
             window.location.href = "v1.html"; // Change this to your game page
     }
-        levelSelect.children[currLevel-1].selected = true;
+        let selectedIndex = currLevel? currLevel-1 : 0
+        levelSelect.children[selectedIndex].selected = true;
     }
 }
 
