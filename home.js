@@ -23,6 +23,9 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     let levelSelect = document.getElementById("level");
     document.getElementById("username").innerHTML = name;
     levelSelect.innerHTML = "<option>Please wait...</option>";
+    let playBtnLabel = document.getElementById("play").innerHTML;
+    document.getElementById("play").innerHTML = "...";
+    document.getElementById("play").disabled = true;
     let globalPlayData = await runTransaction(db, async transaction=>{
         let playDoc = await transaction.get(doc(db, "players", email));
         if (!playDoc.exists())
@@ -56,6 +59,8 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
             playData.substandardLevel = Number(substdLevel);
             localStorage.setItem("playData", JSON.stringify(playData));
         }
+        document.getElementById("play").innerHTML = playBtnLabel;
+        document.getElementById("play").disabled = false;
         document.getElementById("play").onclick = ()=>{
             //localStorage.setItem("level", level.value);
             window.location.href = "v1.html"; // Change this to your game page
