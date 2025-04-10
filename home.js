@@ -1,5 +1,5 @@
 var playData = localStorage.getItem("playData");
-playData= (playData)? playData : {
+playData= (playData)? JSON.parse(playData) : {
     substandardLevel: 1,
     standardLevel: 1,
     score: 0
