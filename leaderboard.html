@@ -130,9 +130,9 @@
   let playersRef = collection(db, "players");
   let q = query(playersRef, orderBy("level", "desc"), orderBy("score","desc"), limit(100));
   let playerDocs;
-  document.getElementById("table").innerHTML = "please wait..."
+  document.getElementById("table").querySelector("tbody").innerHTML = "please wait...";
   playerDocs = await getDocs(q);
-  document.getElementById("table").innerHTML = ""
+  document.getElementById("table").querySelector("tbody").innerHTML = "";
   playerDocs.forEach(doc => {
     let data = doc.data();
     players.push({
