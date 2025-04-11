@@ -131,8 +131,15 @@
   let q = query(playersRef, orderBy("level", "desc"), orderBy("score","desc"), limit(100));
   let playerDocs;
   document.getElementById("table").querySelector("tbody").innerHTML = "please wait...";
-  playerDocs = await getDocs(q);
-  document.getElementById("table").querySelector("tbody").innerHTML = "";
+  try {
+      playerDocs = await getDocs(q);
+      document.getElementById("table").querySelector("tbody").innerHTML = "";
+  } catch(e) {
+    document.getElementById("table").querySelector("tbody").innerHTML = `
+    Failed loading, most probably due to poor network.
+    <br>
+    <button onclick="window.location.reload()">Try again</button>
+  }
   playerDocs.forEach(doc => {
     let data = doc.data();
     players.push({
