@@ -99,37 +99,37 @@ body {
         z-index: 10;
         transform: scaleX(0);
         text-align: left;
-        background: inherit;
+    //    background: inherit;
         transpancy: 0.7;
-        border: 1px solid white;
+     //   border: 1px solid white;
         top: 0;
-        padding-left: 0;
+   //     padding-left: 0;
         overflow: auto;
         max-width: 100%;
 
     }
     .menu-container li {
-        margin: 10px;
-        margin-left: 0;
-        border-bottom: 1px solid white;
-        background-color: #00bcd4;
+     //   margin: 10px;
+     //   margin-left: 0;
+     //   border-bottom: 1px solid white;
+    //    background-color: #00bcd4;
         //overflow: auto;
 
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
+  //  color: white;
+//    border: none;
+  //  padding: 12px 20px;
+//    font-size: 18px;
+//    font-weight: bold;
+//    border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
 
     }
     .menu-container button {
-        border: none;
-        color: white;
-        background: inherit;
-        font-size: 20px;
+    //    border: none;
+        //color: white;
+     //   background: inherit;
+  //      font-size: 20px;
     }
     .menu-container.show {
         transition: transform 0.2s ease-out;
@@ -224,6 +224,67 @@ body {
   border: 1px solid #444; /* optional for better contrast */
   padding: 5px;           /* improves spacing */
         }
+
+
+
+
+      
+.menu-container {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 20px;
+  width: 220px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.menu-container button#close {
+  background: transparent;
+  color: #ffffff;
+  border: none;
+  font-size: 18px;
+  float: right;
+  cursor: pointer;
+}
+
+.menu-container hr {
+  border: 0;
+  height: 1px;
+  background: #444;
+  margin: 10px 0;
+}
+
+.menu-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-container li {
+  margin: 12px 0;
+}
+
+.menu-container a {
+  color: #80cbc4;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.menu-container a:hover {
+  color: #4db6ac;
+}
+
+#logout {
+  cursor: pointer;
+}
+
+#username {
+  margin-left: 5px;
+  font-style: italic;
+  color: #a5d6a7;
+}
 
   </style>
 
