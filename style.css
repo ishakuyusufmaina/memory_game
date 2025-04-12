@@ -44,6 +44,23 @@ footer {
     margin: auto;
 }
 
+
+#board-container {
+    position: relative;
+}
+
+#operation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    display: none;
+}
+.show#operation {
+    display: block;
+}
+
+
 /* Circular Cells */
 .cell {
     display: flex;
