@@ -489,6 +489,30 @@ async function randUniqContPlay(){
 }
 
 
+async function opRow1SeqPlay(){
+    gover_dialog.open=false;
+    let cells = Array.from(board.children);
+    cells = cells.slice(0, 3);
+    cells.forEach(cell=>cell.innerHTML = ".");
+    let operand = choose([1,2,3,4,5,6,7,8,9]);
+    for (let cell of cells){
+        show(cell);
+        let num = choose([1,2,3,4,5,6,7,8,9]);
+        cell.innerHTML = num;
+        guesses.push(num+operand);
+        await wait(1000);
+    }
+        
+    hideAll();
+    cells.forEach(cell => cell.innerHTML = +cell.textContent + operand);
+    let opElm = document.getElementById("operation")
+    opElm.innerHTML = " + " + operand;
+    show(opElm);
+    await wait(1000);
+    hide(opElm);
+    guess.innerHTML = choose(guesses);
+   // canGuess = true;
+}
 
 /*async function seqPlay(){
     gover_dialog.open=false;
@@ -550,6 +574,8 @@ let randSeqPlayer = new Player(randSeqPlay, 1, contPlayer);
 let randUniqSeqPlayer = new Player(randUniqSeqPlay, 1, randSeqPlayer)
 let randContPlayer = new Player(randContPlay, 1, randUniqSeqPlayer);
 let randUniqContPlayer = new Player(randUniqContPlay, 1, randContPlayer)
+
+let opRow1SeqPlayer = new Player(opRow1SeqPlay, 1, randUniqContPlayer);
 
 
 
