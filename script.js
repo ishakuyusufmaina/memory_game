@@ -150,7 +150,7 @@ async function play(){
         Stay tune! <hr>
         Kind regard,
         <br><small>~Maina</small><br>
-        <a href="entry.html">HOME</a>
+        <a href="index.html">HOME</a>
         `;
     }
 }
