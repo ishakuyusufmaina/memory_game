@@ -115,6 +115,7 @@ async function play(){
     let limit = currentPlayer.limit;
     score.innerHTML = `${limit}/${scores}`;
     if (scores >= limit){
+        playLevelUp();
         currentPlayer = currentPlayer.next;
         scores = 0;
         //localStorage.setItem("highestScore", 0);
@@ -152,6 +153,10 @@ async function play(){
         <br><small>~Maina</small><br>
         <a href="entry.html">HOME</a>
         `;
+    }
+    function playLevelUp() {
+            let audio = document.getElementById("levelUpSound");
+            try {audio.play()} catch(e){}
     }
 }
 
