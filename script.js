@@ -97,6 +97,7 @@ const resolveClick = async cell =>{
 //click.onclick= e=> e.target.play();
 
 async function resolveGameOver(){
+    /*
     try {playGameOver()} catch(e) {}
     let actionBtns = [replayBtn];
     gover_dialog.open = true;
@@ -108,6 +109,7 @@ async function resolveGameOver(){
             let audio = document.getElementById("gameOverSound");
             audio.play();
         }
+        */
 }
   
 async function play(){
