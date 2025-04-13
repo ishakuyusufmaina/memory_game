@@ -97,12 +97,17 @@ const resolveClick = async cell =>{
 //click.onclick= e=> e.target.play();
 
 async function resolveGameOver(){
+    try (playGameOver()) catch(e) {}
     let actionBtns = [replayBtn];
     gover_dialog.open = true;
     return new Promise(resolve=>actionBtns.forEach(btn=>btn.onclick=e=>{
         gover_dialog.open = false;
         resolve(e)
     }))
+    function playGameOver() {
+            let audio = document.getElementById("gameOverSound");
+            audio.play();
+        }
 }
   
 async function play(){
