@@ -37,7 +37,7 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
         });
         return playDoc.data();
     }); 
-    alert(globalPlayData.level):
+    
     playData.standardLevel = +globalPlayData.level;
     playData.substandardLevel = +globalPlayData.level;
     playData.score = +globalPlayData.score;
