@@ -97,7 +97,7 @@ const resolveClick = async cell =>{
 //click.onclick= e=> e.target.play();
 
 async function resolveGameOver(){
-    try (playGameOver()) catch(e) {}
+    try {playGameOver()} catch(e) {}
     let actionBtns = [replayBtn];
     gover_dialog.open = true;
     return new Promise(resolve=>actionBtns.forEach(btn=>btn.onclick=e=>{
