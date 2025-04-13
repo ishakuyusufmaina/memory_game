@@ -1,4 +1,3 @@
-
 //localStorage.setItem("highestScore", 0);
 const playData = JSON.parse(localStorage.getItem("playData"));
 /*const playData = {
@@ -184,7 +183,7 @@ async function wait(t){ return new Promise(resolve => setTimeout(_=>resolve(t), 
 
 async function init(db, doc, setDoc, onAuthStateChanged, auth){
     let user = JSON.parse(localStorage.getItem("user"));
-   alert(user);
+  // alert(user);
     let email = user.email;
     let name = user.displayName;
     scores = playData.score;
