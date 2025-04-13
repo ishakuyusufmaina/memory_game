@@ -1,4 +1,4 @@
-try {
+
 //localStorage.setItem("highestScore", 0);
 const playData = JSON.parse(localStorage.getItem("playData"));
 /*const playData = {
@@ -98,7 +98,7 @@ const resolveClick = async cell =>{
 //click.onclick= e=> e.target.play();
 
 async function resolveGameOver(){
-    /*
+    
     try {playGameOver()} catch(e) {}
     let actionBtns = [replayBtn];
     gover_dialog.open = true;
@@ -110,7 +110,7 @@ async function resolveGameOver(){
             let audio = document.getElementById("gameOverSound");
             audio.play();
         }
-        */
+        
 }
   
 async function play(){
@@ -184,6 +184,7 @@ async function wait(t){ return new Promise(resolve => setTimeout(_=>resolve(t), 
 
 async function init(db, doc, setDoc, onAuthStateChanged, auth){
     let user = JSON.parse(localStorage.getItem("user"));
+   alert(user);
     let email = user.email;
     let name = user.displayName;
     scores = playData.score;
@@ -214,6 +215,3 @@ async function init(db, doc, setDoc, onAuthStateChanged, auth){
 }
 
 //await init();
-} catch (e) {
-    alert(e.message)
-}
