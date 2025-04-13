@@ -1,3 +1,4 @@
+try {
 //localStorage.setItem("highestScore", 0);
 const playData = JSON.parse(localStorage.getItem("playData"));
 /*const playData = {
@@ -213,3 +214,6 @@ async function init(db, doc, setDoc, onAuthStateChanged, auth){
 }
 
 //await init();
+} catch (e) {
+    alert(e.message)
+}
