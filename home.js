@@ -37,13 +37,20 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
         });
         return playDoc.data();
     });
-    alert("before try");
+    /*alert("before try");
     try {
     alert(globalPlayData.level);
-    } catch(e) {alert("errooooooo")}
+    } catch(e) {alert("errooooooo")}*/
+   try { 
     playData.standardLevel = +globalPlayData.level;
     playData.substandardLevel = +globalPlayData.level;
     playData.score = +globalPlayData.score;
+   } catch (e) { // the user is a new
+    playData.standardLevel = 1; //+globalPlayData.level;
+    playData.substandardLevel = 1; //+globalPlayData.level;
+    playData.score = 0; //+globalPlayData.score;       
+   }
+       
     localStorage.setItem("playData", JSON.stringify(playData));
     onAuthStateChanged(auth, user=> {if (!user) window.location.href = "signin.html"})
     presentLevelSelection();
