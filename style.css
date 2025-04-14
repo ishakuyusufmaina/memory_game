@@ -304,3 +304,8 @@ footer {
 .show#correct_status {
   display: block;
 }
+
+#wcome {
+  position: absolute;
+  top: 0px;
+}
