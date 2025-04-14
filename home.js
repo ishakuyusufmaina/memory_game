@@ -49,6 +49,9 @@ async function init(db, doc, runTransaction, auth={}, onAuthStateChanged){
     playData.standardLevel = 1; //+globalPlayData.level;
     playData.substandardLevel = 1; //+globalPlayData.level;
     playData.score = 0; //+globalPlayData.score;       
+       let wElm = document.getElementById("wcome");
+       wElm.innerHTML = name + ",<br> welcome on board!";
+       setTimeout(e=> wElm.innerHTML = "", 2000);
    }
        
     localStorage.setItem("playData", JSON.stringify(playData));
