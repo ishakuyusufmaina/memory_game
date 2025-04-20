@@ -131,13 +131,19 @@ footer {
     display: none;
 }
 
-.cell.show > * {
+.cell.show > span {
     display: inline;
     font-size: 40px;
 }
-.cell > * {
+.cell > span {
   display: none;
 }
+
+#board > *.show {
+  //background: #2c2c2c;
+  color: #ffffff;
+}
+
 
 /* Score Section */
 .score-container {
