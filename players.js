@@ -1,4 +1,39 @@
 var level = 0;
+/*
+💊 - &#x1F48A;
+🪣 - &#x1FAA3;
+🚰 - &#x1F6B0;
+🗝️ - &#x1F5DD;
+📚 - &#x1F4DA;
+✂️ - &#x2702;
+🔓 - &#x1F513;
+🔒 - &#x1F512;
+🩻 - &#x1FA7B;
+🕝 - &#x1F55D;
+🇳🇬 - &#x1F1F3;&#x1F1EC;
+🌙 - &#x1F319;
+🐓 - &#x1F413;
+🌲 - &#x1F332;
+🍉 - &#x1F349;
+🍌 - &#x1F34C;
+🌽 - &#x1F33D;
+🎪 - &#x1F3AA;
+🪜 - &#x1FA9C;
+🪚 - &#x1FA9A;
+🛠️ - &#x1F6E0;
+🗑️ - &#x1F5D1;
+🧷 - &#x1F9F7;
+🦺 - &#x1F9BA;
+🥼 - &#x1F97C;
+👟 - &#x1F45F;
+👒 - &#x1F452;
+🦄 - &#x1F984;
+*/
+var percepts = [1,2,3,4,5,6,7,8,9];
+percepts= ["&#x1F48A;", "&#x1FAA3;", "&#x1F513;",
+           "&#x1F1F3;&#x1F1EC;", "&#x1F5D1", "&#x1F33D;",
+           "&#x1F34C;", "&#x1FA9C;", "&#x1F45F;", "&#x1F97C;"];
+           
 function hide(elm){
     elm.classList.remove("show");
 }
@@ -19,7 +54,7 @@ async function row1SeqPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -36,7 +71,7 @@ async function row1UniqSeqPlay(){
    cells.forEach(cell=>cell.innerHTML = ".");
     // canGuess = false;
     let numIndex = 0;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9])
+    let nums = shuffle(percepts)
     for (let cell of cells){
         show(cell);
         let num = nums[numIndex];
@@ -58,7 +93,7 @@ async function row1RandSeqPlay(){
    // canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -78,7 +113,7 @@ async function row1RandUniqSeqPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
     cells = shuffle(cells);
    // canGuess = false;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9]);
+    let nums = shuffle(percepts);
     let numIndex = 0;
     for (let cell of cells){
         show(cell);
@@ -106,7 +141,7 @@ async function row1ContPlay(){
     //canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -128,7 +163,7 @@ async function row1RandContPlay(){
     //canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -148,7 +183,7 @@ async function row1RandUniqContPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
     cells = shuffle(cells);
     //canGuess = false;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9]);
+    let nums = shuffle(percepts);
     let numIndex = 0;
     for (let cell of cells){
         show(cell);
@@ -175,7 +210,7 @@ async function row2SeqPlay(){
     //console.log("2 row seq play", ", cells: ", cells.length);
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -191,7 +226,7 @@ async function row2UniqSeqPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
    // canGuess = false;
     let numIndex = 0;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9])
+    let nums = shuffle(percepts)
     for (let cell of cells){
         show(cell);
         let num = nums[numIndex];
@@ -215,7 +250,7 @@ async function row2RandSeqPlay(){
     //canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -236,7 +271,7 @@ async function row2RandUniqSeqPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
     cells = shuffle(cells);
     //canGuess = false;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9]);
+    let nums = shuffle(percepts);
     let numIndex = 0;
     for (let cell of cells){
         show(cell);
@@ -263,7 +298,7 @@ async function row2ContPlay(){
   //  canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -286,7 +321,7 @@ async function row2RandContPlay(){
     //canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -306,7 +341,7 @@ async function row2RandUniqContPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
     cells = shuffle(cells);
     //canGuess = false;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9]);
+    let nums = shuffle(percepts);
     let numIndex = 0;
     for (let cell of cells){
         show(cell);
@@ -337,7 +372,7 @@ async function seqPlay(){
     //console.log("2 row seq play", ", cells: ", cells.length);
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -353,7 +388,7 @@ async function uniqSeqPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
    // canGuess = false;
     let numIndex = 0;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9])
+    let nums = shuffle(percepts)
     for (let cell of cells){
         show(cell);
         let num = nums[numIndex];
@@ -377,7 +412,7 @@ async function randSeqPlay(){
     //canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -398,7 +433,7 @@ async function randUniqSeqPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
     cells = shuffle(cells);
     //canGuess = false;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9]);
+    let nums = shuffle(percepts);
     let numIndex = 0;
     for (let cell of cells){
         show(cell);
@@ -425,7 +460,7 @@ async function contPlay(){
   //  canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -448,7 +483,7 @@ async function randContPlay(){
     //canGuess = false;
     for (let cell of cells){
         show(cell);
-        let num = choose([1,2,3,4,5,6,7,8,9]);
+        let num = choose(percepts);
         cell.innerHTML = num;
         guesses.push(num);
         await wait(1000);
@@ -469,7 +504,7 @@ async function randUniqContPlay(){
     cells.forEach(cell=>cell.innerHTML = ".");
     cells = shuffle(cells);
     //canGuess = false;
-    let nums = shuffle([1,2,3,4,5,6,7,8,9]);
+    let nums = shuffle(percepts);
     let numIndex = 0;
     for (let cell of cells){
         show(cell);
