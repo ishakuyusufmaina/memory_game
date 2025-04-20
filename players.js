@@ -55,7 +55,7 @@ async function row1SeqPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -76,7 +76,7 @@ async function row1UniqSeqPlay(){
         show(cell);
         let num = nums[numIndex];
         numIndex++
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -94,7 +94,7 @@ async function row1RandSeqPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -119,7 +119,7 @@ async function row1RandUniqSeqPlay(){
         show(cell);
         let num = nums[numIndex];//choose([1,2,3,4,5,6,7,8,9]);
         numIndex++;
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -142,7 +142,7 @@ async function row1ContPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
@@ -164,7 +164,7 @@ async function row1RandContPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
@@ -189,7 +189,7 @@ async function row1RandUniqContPlay(){
         show(cell);
         let num = nums[numIndex];// choose([1,2,3,4,5,6,7,8,9]);
         numIndex++;
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
@@ -211,7 +211,7 @@ async function row2SeqPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -231,7 +231,7 @@ async function row2UniqSeqPlay(){
         show(cell);
         let num = nums[numIndex];
         numIndex++
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -251,7 +251,7 @@ async function row2RandSeqPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -277,7 +277,7 @@ async function row2RandUniqSeqPlay(){
         show(cell);
         let num = nums[numIndex];//choose([1,2,3,4,5,6,7,8,9]);
         numIndex++;
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -299,7 +299,7 @@ async function row2ContPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
@@ -322,7 +322,7 @@ async function row2RandContPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
@@ -347,7 +347,7 @@ async function row2RandUniqContPlay(){
         show(cell);
         let num = nums[numIndex];// choose([1,2,3,4,5,6,7,8,9]);
         numIndex++;
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
@@ -373,7 +373,7 @@ async function seqPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -393,7 +393,7 @@ async function uniqSeqPlay(){
         show(cell);
         let num = nums[numIndex];
         numIndex++
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -413,7 +413,7 @@ async function randSeqPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -439,7 +439,7 @@ async function randUniqSeqPlay(){
         show(cell);
         let num = nums[numIndex];//choose([1,2,3,4,5,6,7,8,9]);
         numIndex++;
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
     }
@@ -461,7 +461,7 @@ async function contPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
@@ -484,7 +484,7 @@ async function randContPlay(){
     for (let cell of cells){
         show(cell);
         let num = choose(percepts);
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
@@ -510,7 +510,7 @@ async function randUniqContPlay(){
         show(cell);
         let num = nums[numIndex];// choose([1,2,3,4,5,6,7,8,9]);
         numIndex++;
-        cell.innerHTML = num;
+        cell.innerHTML = `<span>${num}</span>`;
         guesses.push(num);
         await wait(1000);
         hide(cell);
